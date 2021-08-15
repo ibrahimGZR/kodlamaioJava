@@ -16,7 +16,7 @@ public class Main {
 		// for nero customer
 		BaseCustomerManager customermanager2 = new NeroCustomerManager();
 
-		customermanager2.save(new Customer(2, "İbrahim", "Gezer", 1992, "12121212121"));
+		customermanager2.save(new Customer(2, "İbrahim", "Gezer", 1992, "12121212121")); 
 
 	}
 

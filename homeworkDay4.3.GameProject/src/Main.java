@@ -22,7 +22,7 @@ public class Main {
 
 		Game game1 = new Game(1, "CS:GO", 100);
 
-		Game game2 = new Game(2, "Left 4 Dead ", 78);
+		Game game2 = new Game(2, "Left 4 Dead ", 78); 
 
 		gameManager.add(game1);
 		gameManager.add(game2);
