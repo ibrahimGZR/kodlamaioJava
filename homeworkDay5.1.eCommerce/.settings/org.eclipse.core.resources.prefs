@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/Main.java=UTF-8
+encoding//src/business/constants/Messages.java=UTF-8
+encoding//src/business/validationRules/UserValidator.java=UTF-8
+encoding//src/googleAuth/GoogleAuthManager.java=UTF-8
