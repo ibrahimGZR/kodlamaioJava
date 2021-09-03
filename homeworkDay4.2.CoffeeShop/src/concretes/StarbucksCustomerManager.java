@@ -18,6 +18,7 @@ public class StarbucksCustomerManager extends BaseCustomerManager implements Cus
 
 		if (customerCheckService.checkRealPersonService(customer)) {
 			this.save(customer);
+			System.out.println("sistem okey");
 		} else {
 			System.out.println("Not a valid person");
 		}

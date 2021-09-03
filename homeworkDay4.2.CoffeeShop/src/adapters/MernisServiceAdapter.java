@@ -14,9 +14,8 @@ public class MernisServiceAdapter implements CustomerCheckService {
 		KPSPublicSoapProxy client = new KPSPublicSoapProxy();
 
 		try {
-			return client.TCKimlikNoDogrula(Long.parseLong(customer.getNationalityId()),
-					customer.getFirstName().toUpperCase(), customer.getLastName().toUpperCase(),
-					customer.getDateOfBirthday());
+			return client.TCKimlikNoDogrula(Long.parseLong(customer.getNationalityId()), customer.getFirstName(),
+					customer.getLastName(), customer.getDateOfBirthday());
 
 		}
 
