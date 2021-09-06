@@ -1,13 +1,14 @@
-package kodlamaio.Hrms.entities.concretes;
+package kodlamaio.Hrms.core.entities.concretes;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-
-import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,14 +18,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "job_positions")
-public class JobPosition {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "users")
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "user_id")
+	private int userId;
 
-	@NotNull
-	@Column(name = "position_name")
-	private String positionName;
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "password")
+	private String password;
+
 }
