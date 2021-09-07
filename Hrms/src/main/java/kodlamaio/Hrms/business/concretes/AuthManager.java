@@ -46,21 +46,19 @@ public class AuthManager implements AuthService {
 		}
 
 		var user1 = new User();
-		user1.setEmail(employeeRegisterDto.getEmail());
-		user1.setPassword(employeeRegisterDto.getPassword());
-		var chechVerificationUser = this.userService.add(user1);
-
 		var employee1 = new Employee();
-		employee1.setUserId(user1.getUserId());
+		employee1.setUser(user1);
+		employee1.getUser().setEmail(employeeRegisterDto.getEmail());
+		employee1.getUser().setPassword(employeeRegisterDto.getPassword());
+
 		employee1.setFirstName(employeeRegisterDto.getFirstName());
 		employee1.setLastName(employeeRegisterDto.getLastName());
 		employee1.setBirthYear(employeeRegisterDto.getBirthYear());
-		employee1.setEmail(user1.getEmail());
-		employee1.setPassword(user1.getPassword());
 		employee1.setIdentityNumber(employeeRegisterDto.getIdentityNumber());
 
+		var checkVerificationUser = this.userService.add(user1);
 		var checkVerificationEmployee = this.employeeService.add(employee1);
-		if (!checkVerificationEmployee.isSuccess() || !chechVerificationUser.isSuccess()) {
+		if (!checkVerificationEmployee.isSuccess() || !checkVerificationUser.isSuccess()) {
 			return new ErrorResult(Messages.verificationFailed);
 		}
 		return new SuccessResult(Messages.employeeAdded);
@@ -77,21 +75,20 @@ public class AuthManager implements AuthService {
 		}
 
 		var user1 = new User();
-		user1.setEmail(employerRegisterDto.getEmail());
-		user1.setPassword(employerRegisterDto.getPassword());
-		
-		var chechVerificationUser = this.userService.add(user1);
-
 		var employer1 = new Employer();
-		employer1.setUserId(user1.getUserId());
+		employer1.setUser(user1);
+		employer1.getUser().setEmail(employerRegisterDto.getEmail());
+		employer1.getUser().setPassword(employerRegisterDto.getPassword());
+		
 		employer1.setCompanyName(employerRegisterDto.getCompanyName());
 		employer1.setPhoneNumber(employerRegisterDto.getPhoneNumber());
-		employer1.setEmail(user1.getEmail());
+		employer1.getUser().setEmail(employerRegisterDto.getEmail());
 		employer1.setWebSite(employerRegisterDto.getWebsite());
-		employer1.setPassword(user1.getPassword());
+		employer1.getUser().setPassword(employerRegisterDto.getPassword());
 
+		var checkVerificationUser = this.userService.add(user1);
 		var checkVerification = this.employerService.add(employer1);
-		if (!checkVerification.isSuccess() || !chechVerificationUser.isSuccess()) {
+		if (!checkVerification.isSuccess() || !checkVerificationUser.isSuccess()) {
 			return new ErrorResult(Messages.verificationFailed);
 		}
 		return new SuccessResult(Messages.pendingApproval);
@@ -111,7 +108,7 @@ public class AuthManager implements AuthService {
 
 	private Result checkIdentityNumber(String identityNumber) {
 		var result = employeeService.getByIdentityNumber(identityNumber);
-		if (result.isSuccess()) {
+		if (result.getData() != null) {
 			return new ErrorResult(Messages.identityNumberIsAlreadyInUse);
 		}
 		return new SuccessResult();
@@ -119,7 +116,7 @@ public class AuthManager implements AuthService {
 
 	private Result checkEmail(String email) {
 		var result = userService.getByEmail(email);
-		if (result.isSuccess()) {
+		if (result.getData() != null) {
 			return new ErrorResult(Messages.emailIsAlreadyInUse);
 		}
 		return new SuccessResult();

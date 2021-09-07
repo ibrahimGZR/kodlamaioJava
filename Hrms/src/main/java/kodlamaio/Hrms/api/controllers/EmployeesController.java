@@ -13,7 +13,6 @@ import kodlamaio.Hrms.business.abstracts.EmployeeService;
 import kodlamaio.Hrms.core.utilities.results.DataResult;
 import kodlamaio.Hrms.core.utilities.results.Result;
 import kodlamaio.Hrms.entities.concretes.Employee;
-import kodlamaio.Hrms.entities.concretes.JobPosition;
 
 @RestController
 @RequestMapping("/api/employees")

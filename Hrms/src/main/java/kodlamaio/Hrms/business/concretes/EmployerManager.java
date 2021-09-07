@@ -42,7 +42,7 @@ public class EmployerManager implements EmployerService {
 
 	@Override
 	public Result add(Employer employer) {
-		this.verificationByEmailService.send(employer.getEmail(),"Doğrulama Kodu", UUID.randomUUID().toString());
+		this.verificationByEmailService.send(employer.getUser().getEmail(),"Doğrulama Kodu", UUID.randomUUID().toString());
         if (!this.isVerified()){
             return new ErrorResult();
         }

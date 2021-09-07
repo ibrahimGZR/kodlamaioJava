@@ -38,22 +38,24 @@ public class EmployeeManager implements EmployeeService {
 
 	@Override
 	public Result add(Employee employee) {
-		this.verificationByEmailService.send(employee.getEmail(),"Doğrulama Kodu", UUID.randomUUID().toString());
-        if (!this.isVerified()){
-            return new ErrorResult();
-        }
-        this.employeeDao.save(employee);
-        return new SuccessResult(Messages.employeeAdded);
+		this.verificationByEmailService.send(employee.getUser().getEmail(), "Doğrulama Kodu",
+				UUID.randomUUID().toString());
+		if (!this.isVerified()) {
+			return new ErrorResult();
+		}
+		this.employeeDao.save(employee);
+		return new SuccessResult(Messages.employeeAdded);
 	}
 
 	@Override
 	public Result update(Employee employee) {
-		this.verificationByEmailService.send(employee.getEmail(),"Doğrulama Kodu", UUID.randomUUID().toString());
-        if (!this.isVerified()){
-            return new ErrorResult();
-        }
-        this.employeeDao.save(employee);
-        return new SuccessResult(Messages.employeeUpdated);
+		this.verificationByEmailService.send(employee.getUser().getEmail(), "Doğrulama Kodu",
+				UUID.randomUUID().toString());
+		if (!this.isVerified()) {
+			return new ErrorResult();
+		}
+		this.employeeDao.save(employee);
+		return new SuccessResult(Messages.employeeUpdated);
 	}
 
 	@Override
@@ -61,21 +63,14 @@ public class EmployeeManager implements EmployeeService {
 		this.employeeDao.delete(employee);
 		return new SuccessResult(Messages.employeeDeleted);
 	}
-	
+
 	@Override
 	public DataResult<Employee> getByIdentityNumber(String identityNumber) {
-		for (Employee employee : this.employeeDao.findAll()) {
-			if (employee.getIdentityNumber().equals(identityNumber)) {
-				return new SuccessDataResult<Employee>(employee,"bu tc no sistemde kayıtlı");
-			}
-		}
-		 return new ErrorDataResult<Employee>();
+		return new SuccessDataResult<Employee>(this.employeeDao.getByIdentityNumber(identityNumber), "bu tc no sistemde kayıtlı");
 	}
 
 	public boolean isVerified() {
 		return true;
 	}
-
-	
 
 }

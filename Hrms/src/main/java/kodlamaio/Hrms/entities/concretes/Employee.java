@@ -2,31 +2,32 @@ package kodlamaio.Hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import kodlamaio.Hrms.core.entities.concretes.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","users"})
 @Entity
 @Table(name = "employees")
-public class Employee extends User {
+public class Employee{
 
-	@JsonIgnore
-	@Column(name = "user_id")
-	private int userId;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "employee_id")
+	private int employeeId;
+	
 	@NotNull
 	@Column(name = "first_name")
 	private String firstName;
@@ -42,5 +43,9 @@ public class Employee extends User {
 	@NotNull
 	@Column(name = "birth_year")
 	private int birthYear;
+	
+	@OneToOne()
+	@JoinColumn(name = "user_id")
+	private User user;
 
 }

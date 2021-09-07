@@ -1,15 +1,19 @@
 package kodlamaio.Hrms.core.entities.concretes;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+import kodlamaio.Hrms.entities.concretes.Employee;
+import kodlamaio.Hrms.entities.concretes.Employer;
+import kodlamaio.Hrms.entities.concretes.SystemPersonnel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +22,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
 public class User {
 	@Id
@@ -31,5 +34,16 @@ public class User {
 
 	@Column(name = "password")
 	private String password;
+	
+	@OneToOne(mappedBy = "user")
+	private Employee employee;
+	
+	@OneToOne(mappedBy = "user")
+	private Employer employer;
+	
+	@OneToOne(mappedBy = "user")
+	private SystemPersonnel systemPersonnel;
+	
+	
 
 }

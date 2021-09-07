@@ -8,11 +8,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.Hrms.business.abstracts.UserService;
 import kodlamaio.Hrms.core.dataAccess.UserDao;
 import kodlamaio.Hrms.core.entities.concretes.User;
-import kodlamaio.Hrms.core.utilities.results.DataResult;
-import kodlamaio.Hrms.core.utilities.results.ErrorDataResult;
-import kodlamaio.Hrms.core.utilities.results.Result;
-import kodlamaio.Hrms.core.utilities.results.SuccessDataResult;
-import kodlamaio.Hrms.core.utilities.results.SuccessResult;
+import kodlamaio.Hrms.core.utilities.results.*;
 
 @Service
 public class UserManager implements UserService {
@@ -57,12 +53,7 @@ public class UserManager implements UserService {
 
 	@Override
 	public DataResult<User> getByEmail(String email) {
-		for (User user : this.userDao.findAll()) {
-			if (user.getEmail().equals(email)) {
-				return new SuccessDataResult<User>(user, "bu email sistemde kayıtlı");
-			}
-		}
-		return new ErrorDataResult<User>();
+		return new SuccessDataResult<User>(this.userDao.getByEmail(email), "bu email sistemde kayıtlı");
 	}
 
 }

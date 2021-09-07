@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.Hrms.business.abstracts.EmployerService;
 import kodlamaio.Hrms.core.utilities.results.DataResult;
 import kodlamaio.Hrms.core.utilities.results.Result;
-import kodlamaio.Hrms.entities.concretes.Employee;
 import kodlamaio.Hrms.entities.concretes.Employer;
 
 @RestController
