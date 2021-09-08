@@ -2,6 +2,7 @@ package kodlamaio.Hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.Hrms.business.abstracts.JobPostingService;
@@ -13,8 +14,9 @@ import kodlamaio.Hrms.entities.concretes.JobPosting;
 @Service
 public class JobPostingManager implements JobPostingService {
 
-	JobPostingDao jobPostingDao;
+	private JobPostingDao jobPostingDao;
 
+	@Autowired
 	public JobPostingManager(JobPostingDao jobPostingDao) {
 		super();
 		this.jobPostingDao = jobPostingDao;

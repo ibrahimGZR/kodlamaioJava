@@ -1,14 +1,19 @@
 package kodlamaio.Hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import kodlamaio.Hrms.core.entities.concretes.User;
@@ -20,6 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","user"})
 @Table(name = "employees")
 public class Employee{
 
@@ -47,5 +53,9 @@ public class Employee{
 	@OneToOne()
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "employee")
+	private List<Cv> cvs;
 
 }
