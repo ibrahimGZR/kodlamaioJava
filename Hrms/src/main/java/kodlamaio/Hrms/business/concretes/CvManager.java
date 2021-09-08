@@ -35,4 +35,9 @@ public class CvManager implements CvService{
 		return new SuccessResult();
 	}
 
+	@Override
+	public DataResult<List<Cv>> getByEmployee_EmployeeId(int id) {
+		return new SuccessDataResult<List<Cv>>(this.cvDao.getByEmployee_EmployeeId(id));
+	}
+
 }

@@ -9,5 +9,7 @@ import kodlamaio.Hrms.entities.concretes.Cv;
 public interface CvService {
 	DataResult<List<Cv>> getAll();
 
+	DataResult<List<Cv>> getByEmployee_EmployeeId(int id);
+	
 	Result add(Cv cv);
 }
